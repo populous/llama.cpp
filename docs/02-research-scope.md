@@ -1,8 +1,12 @@
 # Research Scope
 
+## Scope definition
+
+The first stage is a reproducible, code-centered study of llama.cpp inference. The unit of analysis is an execution run configured by source revision, build preset, hardware, backend, model, quantization, and benchmark parameters.
+
 ## Phase 1: Source-centered explanation
 
-Document the following execution path with source paths, symbols, and commit references:
+Document the following execution path with source paths, symbols, and upstream commit references:
 
 ```text
 model file
@@ -41,13 +45,15 @@ Run a fixed `llama-bench` matrix and store:
 - batch and thread settings;
 - average, deviation, and individual samples.
 
+The comparison key must prevent incompatible model, hardware, backend, and parameter combinations from being treated as one baseline.
+
 ## Phase 4: Detailed profiling
 
 When a baseline regression persists, collect function, kernel, memory, synchronization, and host-device transfer data with the appropriate platform profiler.
 
 ## Phase 5: Topological analysis
 
-Transform selected traces into event records and feature vectors. Compare persistence or other topological features with conventional regression metrics.
+Transform selected traces into event records and feature vectors. Compare persistence or other topological features with conventional regression metrics. TDA results are exploratory until they demonstrate repeatability and additional explanatory value.
 
 ## Phase 6: Domain extension
 
@@ -56,3 +62,13 @@ After the llama.cpp pipeline is stable, extend the event model to MCP tool calls
 ## Constraints
 
 The first result must be reproducible on a fixed machine and a fixed model. Debug builds are for correctness, not performance baselines. Hardware, model, backend, and benchmark parameters must be part of the comparison key.
+
+## Explicit exclusions
+
+This stage does not attempt to:
+
+- redesign llama.cpp inference;
+- establish a universal topological metric;
+- compare unrelated hardware without normalization;
+- claim causal relationships from correlation alone;
+- generalize to MCP, A2A, or 3D RAG before the llama.cpp case is validated.
